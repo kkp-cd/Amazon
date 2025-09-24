@@ -54,9 +54,10 @@ jobs:
         uses: azure/webapps-deploy@v2
         with:
           app-name: 'kiranamazongit-gybmhnheagbhhvav' #Exactly same as appservice name
-          slot-name: 'dev'
+          slot-name: 'kiranamazongit-dev'
           publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE }}
           package: '**/Amazon.war'  # if war file insise some directroy then can use this.
+
 
 
 
