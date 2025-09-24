@@ -53,10 +53,11 @@ jobs:
       - name: Deploy WAR to Azure Web App using Publish Profile
         uses: azure/webapps-deploy@v2
         with:
-          app-name: 'kiranamazongit' #Exactly same as appservice name
+          app-name: 'kiranamazongit-gybmhnheagbhhvav' #Exactly same as appservice name
           slot-name: 'dev'
           publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE }}
           package: '**/Amazon.war'  # if war file insise some directroy then can use this.
+
 
 
 
