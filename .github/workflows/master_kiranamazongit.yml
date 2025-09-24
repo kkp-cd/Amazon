@@ -32,7 +32,7 @@ jobs:
       - name: Upload WAR artifact
         uses: actions/upload-artifact@v4
         with:
-          name: java-app
+          name: 'Java-app' #same name to be used in upload and download
           path: Amazon/Amazon-Web/target/*.war
 
   deploy:
@@ -45,14 +45,15 @@ jobs:
       - name: Download WAR artifact
         uses: actions/download-artifact@v4
         with:
-          name: java-app
+          name: 'Java-app' #same name to be used in upload and download
 
       - name: Deploy WAR to Azure Web App using Publish Profile
         uses: azure/webapps-deploy@v2
         with:
-          app-name: 'KiranAmazongit'
+          app-name: 'KiranAmazongit' #Exactly same as appservice name
           slot-name: 'Production'
           publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE }}
-          package: '*.war'
+          package: '**/*.war'  # if war file insise some directroy then can use this.
+
 
 
