@@ -33,7 +33,7 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: 'Java-app' #same name to be used in upload and download
-          path: Amazon/Amazon-Web/target/*.war
+          path: Amazon/Amazon-Web/target/Amazon.war
 
   deploy:
     runs-on: ubuntu-latest
@@ -53,7 +53,8 @@ jobs:
           app-name: 'KiranAmazongit' #Exactly same as appservice name
           slot-name: 'Production'
           publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE }}
-          package: '**/*.war'  # if war file insise some directroy then can use this.
+          package: '**/Amazon.war'  # if war file insise some directroy then can use this.
+
 
 
 
