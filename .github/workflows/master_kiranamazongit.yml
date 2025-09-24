@@ -29,6 +29,9 @@ jobs:
         run: mvn clean package
         working-directory: Amazon
 
+      - name: List contents of target
+        run: ls -R Amazon/Amazon-Web/target
+
       - name: Upload WAR artifact
         uses: actions/upload-artifact@v4
         with:
@@ -54,6 +57,7 @@ jobs:
           slot-name: 'Production'
           publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE }}
           package: '**/Amazon.war'  # if war file insise some directroy then can use this.
+
 
 
 
