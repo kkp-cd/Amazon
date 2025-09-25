@@ -38,25 +38,35 @@ jobs:
           name: 'Java-app' #same name to be used in upload and download
           path: Amazon/Amazon-Web/target/Amazon.war
 
-  deploy:
+   deploy:
     runs-on: ubuntu-latest
-    needs: build
+    needs: build 
     permissions:
-      contents: read
+      id-token: write #This is required for requesting the JWT
+      contents: read #This is required for actions/checkout
 
     steps:
-      - name: Download WAR artifact
+      - name: Download artifact from build job
         uses: actions/download-artifact@v4
         with:
-          name: 'Java-app' #same name to be used in upload and download
-
-      - name: Deploy WAR to Azure Web App using Publish Profile
-        uses: azure/webapps-deploy@v2
+          name: java-app
+      
+      - name: Login to Azure
+        uses: azure/login@v2
         with:
-          app-name: 'kiranamazongit-gybmhnheagbhhvav' #Exactly same as appservice name
-          slot-name: 'kiranamazongit-dev'
-          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE }}
-          package: '**/Amazon.war'  # if war file insise some directroy then can use this.
+          client-id: ${{ secrets.AZUREAPPSERVICE_CLIENTID_A0E04A2745F643E2A2BD723E47C6A7E0 }}
+          tenant-id: ${{ secrets.AZUREAPPSERVICE_TENANTID_6DE274486BBA42889D40E7CC2C17E85E }}
+          subscription-id: ${{ secrets.AZUREAPPSERVICE_SUBSCRIPTIONID_5FD7F2FEDD7548CC80623EF7C2E0E27D }}
+
+      - name: Deploy to Azure Web App
+        id: deploy-to-webapp
+        uses: azure/webapps-deploy@v3
+        with:
+          app-name: 'KiranAmazongit'
+          slot-name: 'Production'
+          package: '**/*.war'
+
+
 
 
 
